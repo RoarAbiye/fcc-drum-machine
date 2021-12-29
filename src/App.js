@@ -1,25 +1,37 @@
-import logo from './logo.svg';
+import ReactFCCtest from 'react-fcctest';
+import React from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const pads = ["Q", "W", "E", "A", "S", "D", "Z", "X", "C"]
+
+class App extends React.Component {
+  render (){
+    return (
+      <div id="drum-machine">
+        <div id="display" class="dis">
+        {pads.map((keys, idx)=>(
+            <Box text={keys} key={idx} />
+        ))}
+        </div>
+          <Box />
+      </div>
+     );
+   }
 }
+
+class Box extends React.Component {
+    render (){
+        return (
+            <div className="box">
+            {this.props.text}
+            </div>
+        )
+    }
+}
+
+      //<ReactFCCtest />
+     //<div id="display"></div>
+     //{pads.map(i => <a className="drum-pads" id={i} href='"#"+{i}'>{i}</a>)}
+     //</div>
 
 export default App;
