@@ -8,9 +8,9 @@ class App extends React.Component {
   render (){
     return (
       <div id="drum-machine">
-        <div id="display" class="dis">
+        <div id="display" className="display">
         {pads.map((keys, idx)=>(
-            <Box text={keys} key={idx} />
+            <Box  text={keys} key={idx} />
         ))}
         </div>
           <Box />
@@ -26,7 +26,8 @@ class Box extends React.Component {
             {this.props.text}
             </div>
         )
-    }
+    };
+    
 }
 
       //<ReactFCCtest />
