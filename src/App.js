@@ -84,8 +84,11 @@ class App extends React.Component {
 class Box extends React.Component {
     render (){
         return (
+            <div className="box">
                 <button className="box drum-pad" id={this.props.text}> {this.props.text} 
                 </button>
+            <audio className="clip" id={this.props.text} src={this.props.key}/>
+            </div>
         )
     };
     
