@@ -1,17 +1,38 @@
-.box {
-    display: grid;
-    grid-template-areas: "Q W E"
-                         "A S D"
-                         "Z X C"; 
-    background-color:tan;
-    margin:5em;
-    width: 5em;
-    height: 5em;
+#drum-machine {
+    background-color: deepskyblue;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+.header {
+    position: sticky;
+    position: absolute;
+    top: 0;
+    color: tomato;
+    width: 100%;
     text-align: center;
+    background-color: lightyellow;
+}
+.display {
+    background-color: lightyellow;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 1em;
+    padding: 1em;
+    margin: 1em;
+
+}
+.box {
+    border-radius: .5em;
+    margin: 1px;
+    width: 3em;
+    height: 8em;
+    justify-content: center;
+    align-items: center;
+    flex: 1 0 30%;
+    background-color: tomato;
+    font-weight: 1000;
+    color:lemonchiffon;
 }
 
-.Q {
-    background-color: teal;
-    width: 50px;
-    height:50px;
-}
