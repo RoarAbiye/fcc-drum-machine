@@ -2,7 +2,6 @@ import ReactFCCtest from 'react-fcctest';
 import React from 'react';
 import './App.css';
 
-
 const audioClips = [
   {
     keyCode: 81,
@@ -59,8 +58,23 @@ const audioClips = [
     url: 'https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3'
   }
 ];
+
 class App extends React.Component {
-    
+
+ eventHandler () {
+    document.addEventListener('keydown',(event) => {
+        const id      =   event.key.toUpperCase();
+        const audio   =   document.getElementById(event.key.toUpperCase());
+        if(document.getElementById(id)) {
+             audio.currentTime=0;
+             audio.play();
+        }
+    })
+  }
+
+  componentDidMount (){
+      this.eventHandler();
+   }
   render (){
     return (
       <div id="drum-machine">
@@ -68,8 +82,8 @@ class App extends React.Component {
         <h1>DRUM MACHINE</h1>
         </div>
         <ReactFCCtest />
-        <div id="display" className="display">
-        {audioClips.map((audioClip, i) => {
+        <div  className="display">
+         {audioClips.map((audioClip, i) => {
             return (
                 <Box audioProp={audioClip} indexProp={i}/>
             );
@@ -83,34 +97,52 @@ class App extends React.Component {
     
     ) 
   };
-    componentDidMount (){
-        document.addEventListener('keydown',(event) => {
-            if(document.getElementById(event.key.toUpperCase())){
-                document.getElementById(event.key.toUpperCase()).play();
-                document.getElementById(event.key.toUpperCase()).currentTime=0;
-         }
-        })
-    }
 }
 
-
 class Box extends React.Component {
-    playClip () {
-        document.getElementById(this.props.audioProp.keyTrigger).play();
-        document.getElementById(this.props.audioProp.keyTrigger).currentTime=0;
-        
-    }
-    render (){
-        return (
-            <div>
-               <button className="drum-pad box" id={this.props.audioProp.id} onClick={this.playClip.bind(this)}>
-                    {this.props.audioProp.keyTrigger}
-                    <audio className="clip" id={this.props.audioProp.keyTrigger} src={this.props.audioProp.url} />
-               </button>
-            </div>
-        )
-    };
+
+ playClip () {
+     const id        =   this.props.audioProp.keyTrigger;
+     const audio     =   document.getElementById(id);
+     audio.currentTime=0;
+     audio.play();
+ }
+   render (){
+       return (
+           <div>
+              <button className="drum-pad box" id={this.props.audioProp.id} onClick={this.playClip.bind(this)}>
+                   {this.props.audioProp.keyTrigger}
+                   <audio className='clip' id={this.props.audioProp.keyTrigger} src={this.props.audioProp.url} />
+              </button>
+           </div>
+       )
+   };
     
+}
+
+class Display extends React.Component {
+    constructor(props){
+        super(props);
+        this.state={text:""}
+    }
+
+ // displayUpdater () {
+ //     console.log(document.querySelectorAll('audio'));
+ //     // let audio = document.querySelectorAll('audio');
+ //     // let a = audio.map((e,i)=>{
+ //     //    return {e[i].id, e[i].playing}
+ //     // })
+ //     // audio.addEventListener('playing', (event) => {
+ //     // // console.log(event.target.id);
+ //    // console.log(a)
+ //     // })
+ // }
+ //  componentDidMount (){
+ //      this.displayUpdater();
+ //   }
+    render() {
+        return(<div id="display"> <h3>Clip: {this.state.text}</h3> </div>)
+    }
 }
 
 export default App;
