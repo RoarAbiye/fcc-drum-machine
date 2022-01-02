@@ -60,37 +60,57 @@ const audioClips = [
   }
 ];
 class App extends React.Component {
-
+    
   render (){
     return (
       <div id="drum-machine">
         <div className="header">
-        <h1>Drum Machine</h1>
+        <h1>DRUM MACHINE</h1>
         </div>
         <ReactFCCtest />
         <div id="display" className="display">
-        {audioClips.map((keys, inx) => {
+        {audioClips.map((audioClip, i) => {
             return (
-                <Box text={keys.keyTrigger} key={keys.url}/>
+                <Box audioProp={audioClip} indexProp={i}/>
             );
            } 
         )}
         </div>
+        <div className="footer">
+        <p>Created for FreeCodeCamp Front End Library Certification</p>
+        </div>
       </div>
-    )
+    
+    ) 
   };
+    componentDidMount (){
+        document.addEventListener('keydown',(event) => {
+            if(document.getElementById(event.key.toUpperCase())){
+                document.getElementById(event.key.toUpperCase()).play();
+                document.getElementById(event.key.toUpperCase()).currentTime=0;
+         }
+        })
+    }
 }
 
+
 class Box extends React.Component {
+    playClip () {
+        document.getElementById(this.props.audioProp.keyTrigger).play();
+        document.getElementById(this.props.audioProp.keyTrigger).currentTime=0;
+        
+    }
     render (){
         return (
-            <div className="box">
-                <button className="box drum-pad" id={this.props.text}> {this.props.text} 
-                </button>
-            <audio className="clip" id={this.props.text} src={this.props.key}/>
+            <div>
+               <button className="drum-pad box" id={this.props.audioProp.id} onClick={this.playClip.bind(this)}>
+                    {this.props.audioProp.keyTrigger}
+                    <audio className="clip" id={this.props.audioProp.keyTrigger} src={this.props.audioProp.url} />
+               </button>
             </div>
         )
     };
     
 }
+
 export default App;
