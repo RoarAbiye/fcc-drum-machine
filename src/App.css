@@ -63,7 +63,7 @@
 @media  (max-height: 600px){
     .header {
         writing-mode: vertical-lr;
-        /* width: auto; */
+        width: auto;
         left: 0;
         transform: rotate(180deg);
         height: 100vh;
